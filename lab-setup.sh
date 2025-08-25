@@ -30,7 +30,6 @@ EOF
 cat <<EOF > landscape-client.yaml
 #cloud-config
 package_update: true
-package_upgrade: true
 packages:
   - software-properties-common
 

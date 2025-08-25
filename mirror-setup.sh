@@ -69,3 +69,11 @@ while true; do
   [ "$progress" -eq 100 ] && echo "Sync complete!" && break
   sleep 10
 done
+
+# Create repository profile
+landscape-api create-repository-profile \
+  --description "Test profile for jammy-backports" jammy-backports-profile
+landscape-api add-pockets-to-repository-profile jammy-backports-profile backports jammy ubuntu
+landscape-api associate-repository-profile --tags jammy-machines jammy-backports-profile
+
+echo "Repository profile created and associated with tag 'jammy-machines'"
