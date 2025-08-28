@@ -1,7 +1,10 @@
 #!/bin/bash
 set -e
 
-SERVER_NAME="landscape-server" 
+if [ -z "$1" ] || [ -z "$2" ]; then
+    echo "Usage: $0 <LANDSCAPE_API_KEY> <LANDSCAPE_API_SECRET>"
+    exit 1
+fi
 
 echo "Installing landscape-api client..."
 sudo snap install landscape-api
@@ -10,9 +13,12 @@ sudo snap install landscape-api
 # You must retrieve your API access key 
 # and secret key from the Landscape dashboard
 # (by clicking on your account name in the upper right corner).
-export LANDSCAPE_API_KEY="5ZHIRVJC9TC2BC92LXDI"
-export LANDSCAPE_API_SECRET="KSfAW49kj3Cf5FJjFgh0d4xohm8ITlRcdwRxFeSc"
+
+SERVER_NAME="landscape-server" 
+export LANDSCAPE_API_KEY="$1"
+export LANDSCAPE_API_SECRET="$2"
 export LANDSCAPE_API_URI="https://${SERVER_NAME}/api/"
+
 # export LANDSCAPE_API_SSL_CA_FILE="/etc/landscape/landscape-server.crt"
 # landscape-api snap only has access to home, so adding cert to system store
 sudo cp /etc/landscape/landscape-server.crt /usr/local/share/ca-certificates/
