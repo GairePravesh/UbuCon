@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# pro token required for registration
+if [ -z "$1" ]; then
+    echo "Usage: $0 <PRO_TOKEN>"
+    exit 1
+fi
+
 # install multipass if not installed
 if ! command -v multipass &> /dev/null; then
     echo "Multipass not found. Installing..."
@@ -9,7 +15,7 @@ fi
 SERVER_NAME="landscape-server" 
 CLIENT1_NAME="client-jammy"
 CLIENT2_NAME="client-noble"
-PRO_TOKEN="xxx" # todo: ask a test token from landscape team for talk
+PRO_TOKEN="$1"
 
 # Create landscape-server.yaml
 cat <<EOF > landscape-server.yaml
